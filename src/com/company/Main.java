@@ -1,4 +1,5 @@
 package com.company;
+
 import java.util.*;
 
 //a)  В задании нельзя использовать циклы for и for each. Только while и Iterator
@@ -13,10 +14,12 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ArrayList<String> a = new ArrayList<>();
         ArrayList<String> b = new ArrayList<>();
         ArrayList<String> c = new ArrayList<>();
+
+        ArrayList<Model> list = new ArrayList<>();
 
         Comparator<String> comparator = (a1, b2) -> {
             Integer i1 = a1.length();
@@ -34,15 +37,26 @@ public class Main {
         Iterator<String> iteratorB = b.iterator();
         Collections.reverse(b);
 
+//        while (iteratorA.hasNext() && iteratorB.hasNext()) {
+//            c.add(iteratorA.next());
+//            c.add(iteratorB.next());
+//        }
+//
+//        printOut(c);
+
         while (iteratorA.hasNext() && iteratorB.hasNext()) {
-            c.add(iteratorA.next());
-            c.add(iteratorB.next());
+            list.add(new Model(iteratorA.next(), iteratorB.next()));
         }
 
-        printOut(c);
+        //       c.sort(comparator);
 
-        c.sort(comparator);
-        printOut(c);
+        printList(list);
+
+//        for (Model model : list) {
+//            System.out.println(model.toString());
+//        }
+
+        // printOut(c);
     }
 
     public static void addToCollection(Collection<String> collection, int cars) {
@@ -52,7 +66,6 @@ public class Main {
             collection.add(s.nextLine());
         }
         System.out.println("Great choose!");
-
     }
 
     public static void addToCollection1(Collection<String> collection, int colours) {
@@ -73,6 +86,16 @@ public class Main {
                 Thread.sleep(500);
             } catch (InterruptedException ignored) {
             }
+        }
+        System.out.println("----------------------------------------");
+    }
+
+    public static void printList(Collection<Model> collection) throws InterruptedException {
+        Iterator<Model> iterator = collection.iterator();
+        System.out.println("----------------------------------------");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+            Thread.sleep(500);
         }
         System.out.println("----------------------------------------");
     }
